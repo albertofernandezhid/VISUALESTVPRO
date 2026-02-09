@@ -194,14 +194,14 @@ section { padding: clamp(60px, 10vh, 100px) var(--container-padding); }
 .services-layout {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 1.6fr);
-    gap: 100px;
+    gap: 10px;
     align-items: stretch;
 }
 
 .services-grid { 
     display: grid; 
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 25px;
+    gap: 30px;
 }
 
 .service-cat { 
@@ -209,6 +209,8 @@ section { padding: clamp(60px, 10vh, 100px) var(--container-padding); }
     padding: 45px 30px; 
     transition: var(--transition-fast); 
     border-bottom: 3px solid transparent; 
+    width: 100%;
+    margin-inline: auto;
 }
 
 .service-cat:hover { 
@@ -232,9 +234,10 @@ section { padding: clamp(60px, 10vh, 100px) var(--container-padding); }
     position: relative;
     margin-inline: auto;
     width: 100%;
-
+    max-width: 640px;
+    max-height: 460px;
     aspect-ratio: 16 / 9;
-    background: #000;
+    background: transparent;
     overflow: hidden;
     border-radius: 8px;
     box-shadow:
@@ -247,8 +250,8 @@ section { padding: clamp(60px, 10vh, 100px) var(--container-padding); }
 .services-screen::before {
     content: "";
     position: absolute;
-    inset: -40%;
-    background: radial-gradient(circle at top, rgba(230, 46, 27, 0.12), transparent 55%);
+    inset: -35%;
+    background: radial-gradient(circle at top, rgba(230, 46, 27, 0.18), transparent 60%);
     opacity: 0.7;
     pointer-events: none;
     mix-blend-mode: screen;
@@ -264,18 +267,22 @@ section { padding: clamp(60px, 10vh, 100px) var(--container-padding); }
 .service-photo {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
     object-fit: contain;
-    background-color: #000;
+    background-color: transparent;
     opacity: 0;
     transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
-    transform: scale(1.02);
+    transform: scale(1.01);
 }
 
 .service-photo.active {
     opacity: 1;
     transform: scale(1);
+    filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.9));
 }
 
 /* Tecnología */
@@ -425,6 +432,66 @@ footer {
 /* Media Queries Responsivas */
 @media (max-width: 1024px) {
     #navbar ul { gap: 15px; }
+    
+    /* Optimizaciones para tablets/iPads */
+    .services-layout {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+    
+    .service-cat {
+        width: 90%;
+        padding: 35px 25px;
+    }
+    
+    .services-screen {
+        max-width: 100%;
+        max-height: 400px;
+    }
+    
+    .valores-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 25px;
+    }
+    
+    .about .container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .tech-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .project-item {
+        flex: 0 0 300px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Ajustes específicos para tablets en landscape */
+    .hero {
+        padding: 100px var(--container-padding) 50px;
+    }
+    
+    .section-title {
+        font-size: clamp(1.6rem, 4vw, 2.2rem);
+    }
+    
+    .services-layout {
+        gap: 60px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -467,7 +534,46 @@ footer {
     .about-text { text-align: left; }
     .tech-list p { font-size: 1.1rem; }
     .scroll-top-btn { right: 20px; bottom: 20px; }
+    
+    .valores-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        justify-items: center;
+    }
+
+    .valores-grid .valor-item:last-child {
+        grid-column: 1 / -1;
+        justify-self: center;
+    }
+    
     .services-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .service-cat {
+        width: 100%;
+    }
+    
+    .services-screen {
+        max-height: 350px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    /* Optimizaciones para tablets pequeñas y móviles grandes */
+    .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .service-cat {
+        width: 85%;
+    }
+    
+    .valores-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    .valores-grid .valor-item:last-child {
+        grid-column: 1 / -1;
+        justify-self: center;
     }
 }
