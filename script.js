@@ -183,3 +183,37 @@ if (slider) {
     xPos = -initialPos;
     animation();
 }
+
+// 6. Visor rotativo de imágenes en Servicios (sin recorte)
+const servicesScreen = document.querySelector('.services-screen');
+
+if (servicesScreen) {
+    const serviceSlides = Array.from(servicesScreen.querySelectorAll('.service-photo'));
+
+    if (serviceSlides.length > 1) {
+        let currentIndex = 0;
+        let paused = false;
+
+        function showSlide(index) {
+            serviceSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            if (paused) return;
+            currentIndex = (currentIndex + 1) % serviceSlides.length;
+            showSlide(currentIndex);
+        }
+
+        // Cambio automático cada 5 segundos
+        setInterval(nextSlide, 3000);
+
+        // Pausa al pasar el ratón por encima del panel
+        const servicesMedia = document.querySelector('.services-media');
+        if (servicesMedia) {
+            servicesMedia.addEventListener('mouseenter', () => paused = true);
+            servicesMedia.addEventListener('mouseleave', () => paused = false);
+        }
+    }
+}
