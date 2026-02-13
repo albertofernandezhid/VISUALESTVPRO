@@ -80,7 +80,7 @@ function showPopup(title, msg, icon) {
     popupTitle.innerText = title;
     popupMsg.innerText = msg;
     popupIcon.innerText = icon;
-    popup.classList.add("active"); // Agrega la clase CSS que pusimos en style.css
+    popup.classList.add("active");
 }
 
 function closePopup() {
@@ -120,7 +120,7 @@ if (slider) {
     let currentTranslate = 0;
     let prevTranslate = 0;
     let xPos = 0;
-    let speed = 0.5; // Velocidad auto-scroll (ajusta a tu gusto)
+    let speed = 0.5;
 
     // Función de animación principal
     function animation() {
@@ -190,24 +190,31 @@ const servicesScreen = document.querySelector('.services-screen');
 if (servicesScreen) {
     const serviceSlides = Array.from(servicesScreen.querySelectorAll('.service-photo'));
 
-    if (serviceSlides.length > 1) {
+    if (serviceSlides.length >= 1) {
         let currentIndex = 0;
         let paused = false;
 
         function showSlide(index) {
-            serviceSlides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
+            const i = index % serviceSlides.length;
+            if (i < 0) return;
+            serviceSlides.forEach((slide, idx) => {
+                slide.classList.toggle('active', idx === i);
             });
+            currentIndex = i;
         }
 
         function nextSlide() {
             if (paused) return;
-            currentIndex = (currentIndex + 1) % serviceSlides.length;
-            showSlide(currentIndex);
+            showSlide(currentIndex + 1);
         }
 
-        // Cambio automático cada 5 segundos
-        setInterval(nextSlide, 3000);
+        // Marcar la primera imagen como activa al cargar
+        showSlide(0);
+
+        // Cambio automático cada X segundos (solo si hay más de una imagen)
+        if (serviceSlides.length > 1) {
+            setInterval(nextSlide, 3000);
+        }
 
         // Pausa al pasar el ratón por encima del panel
         const servicesMedia = document.querySelector('.services-media');

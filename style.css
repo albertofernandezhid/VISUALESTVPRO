@@ -1,5 +1,5 @@
 :root {
-    --primary-red: #E62E1B;
+    --primary-red: #B30000;
     --bg-black: #0a0a0a;
     --card-bg: #161616;
     --text-white: #ffffff;
@@ -90,7 +90,7 @@ h1, h2, h3, .logo, .pre-title {
     min-height: 100vh;
     padding: 120px var(--container-padding) 60px;
     background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), 
-                url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1920&q=80');
+                url('./images/bg1.jpeg');
     background-size: cover; 
     background-position: center;
     background-attachment: fixed;
@@ -306,6 +306,26 @@ section { padding: clamp(60px, 10vh, 100px) var(--container-padding); }
 }
 
 .tech-list p { font-size: 1.3rem; font-weight: bold; margin-bottom: 20px; color: var(--primary-red); }
+
+.tech-reason-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.tech-reason-list li {
+    position: relative;
+    padding-left: 1.5em;
+    margin-bottom: 14px;
+    font-size: 1.1rem;
+    color: var(--text-gray);
+}
+.tech-reason-list li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: var(--primary-red);
+    font-weight: bold;
+}
 
 /* Portfolio Premium */
 .portfolio-container {
